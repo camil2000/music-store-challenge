@@ -61,3 +61,32 @@ class Disc:
         songs = ", ".join(self.song_list)
 
         return f"SID: {self.sid}\nTitle: {self.title}\nArtist: {self.artist}\nSong List: {songs}"
+
+class MusicStore:
+
+    def __init__(self):
+        self.discs: dict[str, Disc] = {}
+
+    def add_disc(self, sid: str, title: str, artist: str,
+                 sale_price: float, purchase_price: float, quantity: int):
+
+        if sid not in self.discs:
+            disc = Disc(sid, title, artist, sale_price, purchase_price, quantity)
+            self.discs[sid] = disc
+
+    def search_by_sid(self, sid: str):
+
+        if sid in self.discs:
+            return self.discs[sid]
+
+        return None
+
+    def search_by_artist(self, artist: str):
+
+        result = []
+
+        for disc in self.discs.values():
+            if disc.artist == artist:
+                result.append(disc)
+
+        return result
