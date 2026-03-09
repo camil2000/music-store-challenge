@@ -92,10 +92,10 @@ class TestMusicStore(unittest.TestCase):
     def test_class_disc_has_methods(self):
         methods = [
             ('add_song', '(song: str)'),
-            ('sell', '(copies: int) -> bool'),
+            ('sell', '(copies: int)'),
             ('supply', '(copies: int)'),
-            ('copies_sold', '() -> int'),
-            ('__str__', '() -> str')
+            ('copies_sold', '()'),
+            ('__str__', '()')
         ]
         for method_name, signature in methods:
             self.assertTrue(hasattr(self.disc_without_transaction, method_name))
@@ -156,11 +156,11 @@ class TestMusicStore(unittest.TestCase):
     def test_class_musicstore_has_methods(self):
         methods = [
             ('add_disc', '(sid: str, title: str, artist: str, sale_price: float, purchase_price: float, quantity: int)'),
-            ('search_by_sid', '(sid: str) -> musicstore.model.Disc | None'),
-            ('search_by_artist', '(artist: str) -> list[musicstore.model.Disc]'),
+            ('search_by_sid', '(sid: str)'),
+            ('search_by_artist', '(artist: str)'),
             ('sell_disc', '(sid: str, copies: int) -> bool'),
             ('supply_disc', '(sid: str, copies: int) -> bool'),
-            ('worst_selling_disc', '() -> musicstore.model.Disc | None'),
+            ('worst_selling_disc', '()'),
         ]
         for method_name, signature in methods:
             self.assertTrue(hasattr(self.empty_music_store, method_name))

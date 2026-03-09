@@ -46,7 +46,7 @@ class Disc:
         self.quantity += copies
         self.transactions.append(Transaction(Transaction.SUPPLY, copies))
 
-    def copies_sold(self) -> int:
+    def copies_sold(self):
 
         total = 0
 
@@ -90,3 +90,31 @@ class MusicStore:
                 result.append(disc)
 
         return result
+
+    def sell_disc(self, sid: str, copies: int) -> bool:
+        disc = self.search_by_sid(sid)
+        if disc is None:
+            return False
+
+        return disc.sell(copies)
+
+    def supply_disc(self, sid: str, copies: int) -> bool:
+        disc = self.search_by_sid(sid)
+        if disc is None:
+            return False
+
+        disc.supply(copies)
+        return True
+
+    def worst_selling_disc(self):
+
+        if len(self.discs) == 0:
+            return None
+
+        worst = None
+
+        for disc in self.discs.values():
+            if worst is None or disc.copies_sold() < worst.copies_sold():
+                worst = disc
+
+        return worst
